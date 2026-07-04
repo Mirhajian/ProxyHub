@@ -1,16 +1,20 @@
-<div align="center">
-  <img src="assets/banner.jpeg" alt="ProxyHub Banner" width="100%">
+,<div align="center">
+  <img src="assets/banner.png" alt="ProxyHub Banner" width="100%">
 </div>
 
 # 🌐 ProxyHub — Per-Site Proxy Switcher
 
 <div align="center">
 
-[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#-support-the-project--donate)
+[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#-support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers)
 
 </div>
 
 > نسخه فارسی این راهنما موجود است: [README.fa.md](README.fa.md)
+
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 **ProxyHub** is a Chrome extension that lets you route a proxy **per website**, instead of
 turning one proxy on or off for your entire browser. Pick a site, choose which proxy it
@@ -19,7 +23,9 @@ management — is handled for you.
 
 No technical background needed: install it, follow the built-in walkthrough, and you're done.
 
----
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 ## ✨ Features
 
@@ -38,7 +44,9 @@ No technical background needed: install it, follow the built-in walkthrough, and
   behind a master passphrase instead of storing them in plain text.
 - **Dark & light themes.**
 
----
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 ## 🚀 Install
 
@@ -59,7 +67,9 @@ No technical background needed: install it, follow the built-in walkthrough, and
 That's it — a welcome guide opens automatically the first time, walking you through
 everything with pictures.
 
----
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 ## 📖 How to use it
 
@@ -76,7 +86,9 @@ everything with pictures.
 4. **Let it help you** — if a site needs extra CDN domains, or a page has broken
    images/scripts, ProxyHub will offer a one-click fix.
 
----
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 ## ⚠️ Good to know
 
@@ -86,7 +98,9 @@ everything with pictures.
 - Safari isn't supported: Apple doesn't allow browser extensions to control proxy settings
   at all, so this isn't something that can be added later — it's a platform limitation.
 
----
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 ## 💛 Support the Project — Donate
 
@@ -101,11 +115,11 @@ Every contribution, big or small, is deeply appreciated. 🙏
 
 <div align="center">
 
-|  | Network | Address |
-|:---:|:---|:---|
-| 💎 | **TON** | `UQDPxrimgBU6Mil0dhDn0Fc303RLRXKr9hGGDu7bTEBdGGqs` |
-| 🔴 | **TRX (Tron)** | `TXix7uf6JPUKvWeUbA4A7wmQLVKnDbLRQU` |
-| 🔷 | **ETH (Ethereum)** | `0x1FC907d3396460f1Cd94E3BC48564b1b46b70026` |
+| Network | Address |
+|:---|:---|
+| ![TON](https://img.shields.io/badge/TON-0088CC?style=flat-square&logo=ton&logoColor=white) | `UQDPxrimgBU6Mil0dhDn0Fc303RLRXKr9hGGDu7bTEBdGGqs` |
+| ![TRC20](https://img.shields.io/badge/TRC20%20(Tron)-FF060A?style=flat-square&logo=tron&logoColor=white) | `TXix7uf6JPUKvWeUbA4A7wmQLVKnDbLRQU` |
+| ![ETH](https://img.shields.io/badge/ERC20%20(Ethereum)-3C3C3D?style=flat-square&logo=ethereum&logoColor=white) | `0x1FC907d3396460f1Cd94E3BC48564b1b46b70026` |
 
 </div>
 

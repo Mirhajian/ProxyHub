@@ -1,15 +1,19 @@
 <div align="center">
-  <img src="assets/banner.jpeg" alt="ProxyHub Banner" width="100%">
+  <img src="assets/banner.png" alt="ProxyHub Banner" width="100%">
 </div>
 
 # 🌐 ProxyHub — کنترل پروکسی در دستان تو
 <div align="center" dir="rtl">
 
-[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#-حمایت-از-پروژه--دونیت)
+[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#-حمایت-از-پروژه--دونیت) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers)
 
 </div>
 
 > The English version of this guide is available at: [README.md](README.md)
+
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 <div dir="rtl">
 
@@ -20,7 +24,9 @@
 
 نیازی به دانش فنی نیست: افزونه را نصب کنید، راهنمای تصویری  را دنبال کنید و کافی است.
 
----
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 ## ✨ قابلیت‌ها
 
@@ -39,7 +45,9 @@
   آن را پشت یک رمز اصلی قفل کنید، به‌جای ذخیره‌شدن به‌صورت متن ساده.
 - **پشتیبانی از تم روشن و تیره.**
 
----
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 ## 🚀 نصب
 
@@ -65,7 +73,9 @@
 همین! همان بار اول، یک راهنمای خوش‌آمدگویی به‌صورت خودکار باز می‌شود و همراه با تصویر همه‌چیز
 را توضیح می‌دهد.
 
----
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 ## 📖 نحوه استفاده
 
@@ -85,7 +95,9 @@
 ۴. **بگذارید افزونه کمکتان کند** — اگر سایتی به دامنه‌های CDN بیشتری نیاز دارد، یا صفحه‌ای
    تصویر/اسکریپت خراب دارد، ProxyHub یک راه‌حل یک‌کلیکی پیشنهاد می‌دهد.
 
----
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 ## ⚠️ نکات مهم
 
@@ -95,7 +107,9 @@
 - سافاری پشتیبانی نمی‌شود: اپل اصلاً اجازه نمی‌دهد افزونه‌های مرورگر تنظیمات پروکسی را کنترل
   کنند، بنابراین این محدودیت خود پلتفرم است، نه چیزی که بعداً بتوان اضافه کرد.
 
----
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
 
 ## 💛 حمایت از پروژه
 
@@ -108,11 +122,11 @@
 
 <div align="center">
 
-|  | شبکه | آدرس |
-|:---:|:---|:---|
-| 💎 | **TON** | `UQDPxrimgBU6Mil0dhDn0Fc303RLRXKr9hGGDu7bTEBdGGqs` |
-| 🔴 | **TRX (ترون)** | `TXix7uf6JPUKvWeUbA4A7wmQLVKnDbLRQU` |
-| 🔷 | **ETH (اتریوم)** | `0x1FC907d3396460f1Cd94E3BC48564b1b46b70026` |
+| شبکه | آدرس |
+|:---|:---|
+| ![TON](https://img.shields.io/badge/TON-0088CC?style=flat-square&logo=ton&logoColor=white) | `UQDPxrimgBU6Mil0dhDn0Fc303RLRXKr9hGGDu7bTEBdGGqs` |
+| ![TRC20](https://img.shields.io/badge/TRC20%20(ترون)-FF060A?style=flat-square&logo=tron&logoColor=white) | `TXix7uf6JPUKvWeUbA4A7wmQLVKnDbLRQU` |
+| ![ETH](https://img.shields.io/badge/ERC20%20(اتریوم)-3C3C3D?style=flat-square&logo=ethereum&logoColor=white) | `0x1FC907d3396460f1Cd94E3BC48564b1b46b70026` |
 
 </div>
 
