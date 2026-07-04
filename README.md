@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="assets/banner.png" alt="ProxyHub Banner" width="100%">
+</div>
+
 # 🌐 ProxyHub — Per-Site Proxy Switcher
 
 <div align="center">
