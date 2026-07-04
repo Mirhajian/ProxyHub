@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/banner.png" alt="ProxyHub Banner" width="100%">
+  <img src="assets/banner.jpeg" alt="ProxyHub Banner" width="100%">
 </div>
 
 # 🌐 ProxyHub — کنترل پروکسی در دستان تو
