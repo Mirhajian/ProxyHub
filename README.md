@@ -6,11 +6,9 @@
 
 <div align="center">
 
-[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#-support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/YOUR-USERNAME/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers)
+[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#-support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers)
 
 </div>
-
-<!-- NOTE: replace "YOUR-USERNAME" above with the actual GitHub owner/org of this repo -->
 
 > نسخه فارسی این راهنما موجود است: [README.fa.md](README.fa.md)
 

@@ -5,11 +5,9 @@
 # <img src="assets/icons/icon-globe.png" width="32" align="absmiddle"> ProxyHub — کنترل پروکسی در دستان تو
 <div align="center" dir="rtl">
 
-[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#-حمایت-از-پروژه--دونیت) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/YOUR-USERNAME/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers)
+[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#-حمایت-از-پروژه--دونیت) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers)
 
 </div>
-
-<!-- توجه: به‌جای "YOUR-USERNAME" نام واقعی صاحب ریپازیتوری گیت‌هاب را بگذارید -->
 
 > The English version of this guide is available at: [README.md](README.md)
 
