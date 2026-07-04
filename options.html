@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>ProxyHub — Manage</title>
+<link rel="stylesheet" href="options.css">
+<link rel="stylesheet" href="onboard.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="top-row">
+      <div class="brand"><span class="logo" id="brandLogo"></span>ProxyHub</div>
+      <div class="top-actions">
+        <label class="master-switch" id="masterSwitch" title="Turn all routing off — everything loads Direct">
+          <span class="master-switch-icon" id="masterSwitchIcon"></span>
+          <span class="master-switch-text">
+            <strong>Routing</strong>
+            <small id="masterSwitchState">Enabled</small>
+          </span>
+          <span class="ph-toggle">
+            <input type="checkbox" id="globalEnable">
+            <span class="ph-slider"></span>
+          </span>
+        </label>
+        <button id="themeToggle" class="icon-btn" title="Toggle dark / light theme"><span class="ph-svg" id="themeIcon"></span></button>
+      </div>
+    </div>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="rules">Rules (<span id="ruleCount">0</span>)</button>
+      <button class="tab-btn" data-tab="profiles">Proxy profiles</button>
+      <button class="tab-btn" data-tab="vault">Security / Vault</button>
+      <button class="tab-btn" data-tab="importexport">Import / Export</button>
+      <button class="tab-btn" data-tab="knownhosts">Known hosts</button>
+    </nav>
+  </header>
+
+  <!-- RULES TAB -->
+  <section id="tab-rules" class="tab-panel active">
+    <div class="panel-header">
+      <div class="search-box">
+        <span class="ph-svg" id="searchIcon"></span>
+        <input type="text" id="searchInput" placeholder="Search rules (domain or profile)…" />
+      </div>
+      <select id="profileFilter"><option value="">All profiles</option></select>
+      <button id="addRuleBtn" class="primary"><span class="ph-svg" data-icon="plus"></span>New rule</button>
+    </div>
+
+    <div class="az-nav" id="azNav"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-expand"></th>
+            <th>Site</th>
+            <th>Route through</th>
+            <th class="col-actions"></th>
+          </tr>
+        </thead>
+        <tbody id="ruleTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <button id="prevPage" class="secondary">Previous</button>
+      <span id="pageInfo">Page 1</span>
+      <button id="nextPage" class="secondary">Next</button>
+      <select id="pageSize">
+        <option value="50">50 per page</option>
+        <option value="100" selected>100 per page</option>
+        <option value="250">250 per page</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- PROFILES TAB -->
+  <section id="tab-profiles" class="tab-panel">
+    <div class="card" id="defaultModeCard">
+      <h3>Default behavior</h3>
+      <p class="muted">
+        Sites with no matching rule below load <strong>Direct (no proxy)</strong> by default.
+        Change this if unmatched traffic should go through a proxy profile instead.
+      </p>
+      <div class="row">
+        <label for="defaultModeSelect" style="margin:0; align-self:center;">Default for sites with no rule:</label>
+        <select id="defaultModeSelect"></select>
+      </div>
+    </div>
+    <div class="panel-header">
+      <button id="addProfileBtn" class="primary"><span class="ph-svg" data-icon="plus"></span>New profile</button>
+    </div>
+    <div id="profileList" class="profile-grid"></div>
+  </section>
+
+  <!-- VAULT TAB -->
+  <section id="tab-vault" class="tab-panel">
+    <div class="card">
+      <h3>Proxy password encryption (optional)</h3>
+      <p class="muted">
+        By default, proxy passwords are stored unencrypted in <code>chrome.storage.local</code>
+        (a browser limitation). Set a master passphrase to encrypt passwords with AES-GCM; the
+        decryption key is kept in memory only for the current browser session.
+      </p>
+      <div id="vaultStatus" class="status-line">Checking…</div>
+      <div class="vault-form">
+        <input type="password" id="vaultPassphrase" placeholder="Master passphrase" />
+        <button id="unlockVaultBtn" class="primary">Unlock / set passphrase</button>
+        <button id="lockVaultBtn" class="secondary">Lock</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPORT/EXPORT TAB -->
+  <section id="tab-importexport" class="tab-panel">
+    <div class="card">
+      <h3>Bulk import</h3>
+      <p class="muted">One per line: <code>pattern[,pattern2,...] TAB profileName</code> — or just a domain (default profile is used).</p>
+      <textarea id="bulkImportText" rows="8" placeholder="example.com&#10;*.cdn.example.com&#10;youtube.com,*.youtube.com,*.ytimg.com,*.googlevideo.com"></textarea>
+      <div class="row">
+        <select id="bulkImportProfile"></select>
+        <button id="bulkImportBtn" class="primary">Add lines above</button>
+        <input type="file" id="jsonImportFile" accept="application/json" hidden>
+        <button id="jsonImportBtn" class="secondary"><span class="ph-svg" data-icon="upload"></span>Import from JSON file</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Export</h3>
+      <button id="exportJsonBtn" class="secondary"><span class="ph-svg" data-icon="download"></span>Download settings (JSON)</button>
+      <p class="muted">If the Vault is locked, encrypted passwords are exported as-is (only usable again with the same master passphrase).</p>
+    </div>
+    <div class="card">
+      <h3>Diagnostics</h3>
+      <p class="muted">
+        If browsing breaks after adding a rule, this shows exactly what ProxyHub generated and applied.
+        A profile with an empty host/port is skipped automatically — if a rule you expect to see is
+        missing below, check that its profile has both a host and a port set.
+      </p>
+      <div id="diagStatus" class="status-line">Checking…</div>
+      <pre id="diagPacScript" class="mono diag-pre"></pre>
+      <button id="refreshDiagBtn" class="secondary" style="margin-top:8px;">Refresh</button>
+    </div>
+  </section>
+
+  <!-- KNOWN HOSTS TAB -->
+  <section id="tab-knownhosts" class="tab-panel">
+    <div class="card">
+      <h3>Custom CDN domains</h3>
+      <p class="muted">
+        Domains you add here are treated exactly like the built-in CDN list —
+        used to recognize a broken resource as "a known CDN" in the on-page
+        notification and the popup's related-domains hint. One per line, no wildcards.
+      </p>
+      <textarea id="customCdnText" rows="4" placeholder="cdn.example.com&#10;assets.example.net"></textarea>
+      <div class="row"><button id="saveCustomCdnBtn" class="primary">Save</button></div>
+    </div>
+
+    <div class="card">
+      <h3>Built-in CDN domains <span class="muted" id="builtinCdnCount"></span></h3>
+      <p class="muted">Click a domain to hide it from suggestions (it won't be removed, just ignored).</p>
+      <div class="search-box" style="margin-bottom:10px;">
+        <span class="ph-svg" id="builtinCdnSearchIcon"></span>
+        <input type="text" id="builtinCdnSearch" placeholder="Filter built-in domains…" />
+      </div>
+      <div id="builtinCdnList" class="host-chip-list"></div>
+      <div id="hiddenCdnBox" class="row" style="margin-top:10px;"></div>
+    </div>
+
+    <div class="panel-header">
+      <h3 style="margin:0; flex:1;">Related CDN groups (per site)</h3>
+      <button id="addGroupBtn2" class="primary"><span class="ph-svg" data-icon="plus"></span>New group</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Site</th><th>Label</th><th>Patterns</th><th class="col-actions"></th></tr></thead>
+        <tbody id="groupsTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<!-- CDN group edit modal -->
+<div id="cdnGroupModal" class="modal" hidden>
+  <div class="modal-box">
+    <h3 id="cdnGroupModalTitle">New CDN group</h3>
+    <label>Site domain <span class="hint">— matched by suffix, e.g. "youtube.com"</span></label>
+    <input type="text" id="cdnGroupKey" placeholder="example.com" />
+    <label>Label</label>
+    <input type="text" id="cdnGroupLabel" placeholder="Example Site" />
+    <label>Related patterns <span class="hint">— one per line, * wildcard allowed</span></label>
+    <textarea id="cdnGroupPatterns" rows="4" placeholder="example.com&#10;*.example.com&#10;*.example-cdn.net"></textarea>
+    <div class="modal-actions">
+      <button id="cdnGroupSaveBtn" class="primary">Save</button>
+      <button id="cdnGroupCancelBtn" class="secondary">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Rule edit modal -->
+<div id="ruleModal" class="modal" hidden>
+  <div class="modal-box">
+    <h3 id="ruleModalTitle">New rule</h3>
+    <label>Site pattern(s) <span class="hint">— the domain this rule is for (* wildcard allowed)</span></label>
+    <textarea id="rulePatterns" rows="3" placeholder="youtube.com&#10;*.youtube.com"></textarea>
+    <label>Additional / CDN patterns <span class="hint">— related domains nested under this site (optional)</span></label>
+    <textarea id="ruleExtraPatterns" rows="3" placeholder="*.ytimg.com&#10;*.googlevideo.com"></textarea>
+    <div id="groupSuggestBox" class="group-suggest" hidden></div>
+    <div id="conflictBox" class="conflict-box" hidden></div>
+    <label>Route through</label>
+    <select id="ruleProfileSelect"></select>
+    <label>Note <span class="hint">— visible only here, not in the rule list</span></label>
+    <input type="text" id="ruleNote" placeholder="Optional note about this rule" />
+    <div class="modal-actions">
+      <button id="ruleSaveBtn" class="primary">Save</button>
+      <button id="ruleCancelBtn" class="secondary">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Profile edit modal -->
+<div id="profileModal" class="modal" hidden>
+  <div class="modal-box">
+    <h3 id="profileModalTitle">New profile</h3>
+    <label>Name</label>
+    <input type="text" id="profName" />
+    <label>Color</label>
+    <input type="color" id="profColor" value="#da7756" />
+    <label>Type</label>
+    <select id="profScheme">
+      <option value="http">HTTP / HTTPS (recommended — works for both)</option>
+      <option value="socks4">SOCKS4</option>
+      <option value="socks5">SOCKS5</option>
+    </select>
+    <p class="muted" id="schemeHint" style="margin:2px 0 0;"></p>
+    <label class="check" id="forceTlsRow" style="flex-direction:row; align-items:center; gap:7px;">
+      <input type="checkbox" id="profForceTls">
+      Connect to the proxy itself over TLS <span class="hint">— advanced, rare, only if your proxy specifically requires it</span>
+    </label>
+    <label>Host</label>
+    <input type="text" id="profHost" placeholder="proxy.example.com" />
+    <label>Port</label>
+    <input type="number" id="profPort" placeholder="8080" />
+    <label>Username (optional)</label>
+    <input type="text" id="profUsername" />
+    <label>Password (optional)</label>
+    <input type="password" id="profPassword" />
+    <div class="modal-actions">
+      <button id="profSaveBtn" class="primary">Save</button>
+      <button id="profCancelBtn" class="secondary">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- First-run onboarding wizard (shown once, over the main page) -->
+<div class="onb-overlay" id="onbOverlay" hidden>
+  <div class="onb-modal">
+
+    <div class="onb-view onb-view-wizard" id="onbWizardView">
+      <button class="onb-close" id="onbClose" title="Close" aria-label="Close"></button>
+      <div class="onb-viewport">
+        <div class="onb-track" id="onbTrack"></div>
+      </div>
+      <div class="onb-footer">
+        <div class="onb-dots" id="onbDots"></div>
+        <div class="onb-actions">
+          <button class="onb-btn-ghost" id="onbPrev">Back</button>
+          <button class="onb-btn-primary" id="onbNext">Next</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="lib/constants.js"></script>
+<script src="lib/groups.js"></script>
+<script src="lib/crypto.js"></script>
+<script src="lib/icons.js"></script>
+<script src="options.js"></script>
+<script src="onboard.js"></script>
+</body>
+</html>

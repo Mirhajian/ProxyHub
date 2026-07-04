@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>ProxyHub</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="ph-header">
+    <div class="ph-brand"><span class="ph-logo" id="brandLogo"></span><span>ProxyHub</span></div>
+    <div class="ph-status-pill" id="statusPill"></div>
+  </header>
+
+  <section class="ph-current">
+    <div class="ph-current-label">This site</div>
+    <div class="ph-current-host" id="currentHost">—</div>
+
+    <div class="ph-field" id="profileField">
+      <label class="ph-field-label">Route through</label>
+      <select id="profileSelect"></select>
+    </div>
+    <label class="ph-check" id="subdomainRow">
+      <input type="checkbox" id="includeSubdomains" checked>
+      Include subdomains
+    </label>
+    <div class="ph-inline-msg" id="quickAddMsg" hidden></div>
+  </section>
+
+  <section class="ph-group-hint" id="groupHint" hidden></section>
+
+  <section class="ph-reload">
+    <button id="reloadPageBtn" class="ph-reload-btn">
+      <span class="ph-svg" id="reloadIcon"></span>
+      <span class="ph-reload-text">
+        <strong>Reload this page</strong>
+        <small>Apply the routing change above</small>
+      </span>
+    </button>
+  </section>
+
+  <footer class="ph-footer">
+    <button id="openOptions" class="ph-manage-btn">
+      <span class="ph-svg" id="manageIcon"></span>
+      Manage all rules &amp; profiles
+    </button>
+  </footer>
+
+  <script src="lib/constants.js"></script>
+  <script src="lib/groups.js"></script>
+  <script src="lib/icons.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

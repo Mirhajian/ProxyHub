@@ -1,0 +1,95 @@
+/* Onboarding wizard — shown once, inside the main Options page. Reuses the
+   page's own theme variables (--bg-raised, --accent, etc. from options.css)
+   so it automatically follows the current dark/light theme. */
+
+.onb-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(10,9,7,0.66);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.onb-overlay[hidden] { display: none; }
+.onb-modal [hidden] { display: none !important; }
+
+.onb-modal {
+  width: 100%; max-width: 460px;
+  background: var(--bg-raised); border: 1px solid var(--border-strong);
+  border-radius: 22px; box-shadow: 0 28px 80px rgba(0,0,0,0.45), 0 4px 18px rgba(0,0,0,0.2);
+  overflow: hidden; position: relative;
+}
+
+/* ---------------- wizard ---------------- */
+.onb-view-wizard { padding: 0; }
+
+.onb-close {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  width: 32px; height: 32px; padding: 0; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--bg-raised); color: var(--text-dim);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  transition: color .15s ease, background .15s ease, transform .15s ease;
+}
+.onb-close svg { width: 14px; height: 14px; }
+.onb-close:hover { color: var(--text); background: var(--border-strong); transform: scale(1.06); }
+
+.onb-viewport { overflow: hidden; }
+.onb-track {
+  display: flex;
+  transition: transform .38s cubic-bezier(.22,.9,.32,1);
+  touch-action: pan-y;
+  cursor: grab;
+}
+.onb-track.onb-dragging { transition: none; cursor: grabbing; }
+
+.onb-slide {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 40px 32px 26px;
+  text-align: center;
+  user-select: none;
+}
+
+/* Icon sits inside a soft radial "stage" so it reads immediately, instead
+   of floating small and flat at the top of the slide. */
+.onb-slide-icon {
+  width: 104px; height: 104px; border-radius: 28px; margin: 0 auto 22px;
+  background:
+    radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%),
+    var(--accent-soft);
+  color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.onb-slide-icon svg { width: 52px; height: 52px; }
+.onb-slide-icon img { width: 56px; height: 56px; }
+
+.onb-slide h3 { margin: 0 0 10px; font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: -.01em; }
+.onb-slide p { margin: 0; color: var(--text-dim); font-size: 13.5px; line-height: 1.65; max-width: 330px; margin-inline: auto; }
+
+.onb-legend { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; text-align: start; }
+.onb-legend-row {
+  display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 12px;
+  background: var(--bg-raised-2); border: 1px solid var(--border);
+}
+.onb-legend-row img { width: 30px; height: 30px; flex-shrink: 0; }
+.onb-legend-row span { font-size: 12.5px; color: var(--text); font-weight: 600; line-height: 1.4; }
+
+.onb-footer { padding: 8px 26px 26px; }
+.onb-dots { display: flex; justify-content: center; gap: 6px; margin-bottom: 18px; }
+.onb-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border-strong); cursor: pointer; transition: background .15s ease, width .15s ease; border: none; padding: 0; }
+.onb-dot.active { background: var(--accent); width: 20px; border-radius: 3px; }
+
+.onb-actions { display: flex; gap: 10px; }
+.onb-btn-ghost, .onb-btn-primary {
+  flex: 1; padding: 13px 10px; border-radius: 12px; font-weight: 700; font-size: 13.5px;
+  cursor: pointer; border: 1px solid transparent;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s ease, border-color .15s ease, color .15s ease, transform .1s ease;
+}
+.onb-btn-ghost { background: transparent; border-color: var(--border-strong); color: var(--text-dim); }
+.onb-btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+.onb-btn-ghost[hidden] { display: none; }
+.onb-btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 35%, transparent); }
+.onb-btn-primary:hover { background: var(--accent-hover); }
+.onb-btn-primary:active, .onb-btn-ghost:active { transform: scale(.97); }
