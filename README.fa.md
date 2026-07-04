@@ -2,12 +2,14 @@
   <img src="assets/banner.png" alt="ProxyHub Banner" width="100%">
 </div>
 
-# 🌐 ProxyHub — کنترل پروکسی در دستان تو
+# <img src="assets/icons/icon-globe.png" width="32" align="absmiddle"> ProxyHub — کنترل پروکسی در دستان تو
 <div align="center" dir="rtl">
 
-[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#-حمایت-از-پروژه--دونیت) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers)
+[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#-حمایت-از-پروژه--دونیت) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/YOUR-USERNAME/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers)
 
 </div>
+
+<!-- توجه: به‌جای "YOUR-USERNAME" نام واقعی صاحب ریپازیتوری گیت‌هاب را بگذارید -->
 
 > The English version of this guide is available at: [README.md](README.md)
 
@@ -28,7 +30,7 @@
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
-## ✨ قابلیت‌ها
+## <img src="assets/icons/icon-features.png" width="26" align="absmiddle"> قابلیت‌ها
 
 - **یک پروکسی برای هر سایت** — یوتیوب از یک پروکسی، سایتی دیگر از پروکسی دیگر، و بقیه
   سایت‌ها به‌طور عادی بارگذاری می‌شوند. دیگر نیازی به روشن/خاموش کردن یک پروکسی سراسری نیست.
@@ -49,7 +51,7 @@
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
-## 🚀 نصب
+## <img src="assets/icons/icon-install.png" width="26" align="absmiddle"> نصب
 
 ### روش الف — فروشگاه وب کروم
 *(به‌زودی — این بخش پس از انتشار در فروشگاه، با لینک مربوطه به‌روزرسانی می‌شود.)*
@@ -77,7 +79,7 @@
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
-## 📖 نحوه استفاده
+## <img src="assets/icons/icon-guide.png" width="26" align="absmiddle"> نحوه استفاده
 
 ۱. **یک پروکسی اضافه کنید** — صفحه *تنظیمات* افزونه را باز کنید → *پروفایل‌های پروکسی* →
    آدرس سرور، پورت و در صورت نیاز، نام‌کاربری/رمز عبور پروکسی خود را وارد کنید. این کار فقط
@@ -88,9 +90,9 @@
    حالت *مستقیم* را نگه دارید.
 
 ۳. **آیکن را بخوانید** — آیکن نوار ابزار همیشه وضعیت تب فعلی را با یک نگاه نشان می‌دهد:
-   - 🟢 **پروکسی فعال** — این تب از یک پروکسی عبور می‌کند
-   - ⚪️ **مستقیم** — بدون قانون، به‌صورت عادی بارگذاری می‌شود
-   - 🔴 **غیرفعال** — مسیردهی برای همه‌جا متوقف است
+   - <img src="assets/icons/status-proxied.png" width="14" align="absmiddle"> **پروکسی فعال** — این تب از یک پروکسی عبور می‌کند
+   - <img src="assets/icons/status-direct.png" width="14" align="absmiddle"> **مستقیم** — بدون قانون، به‌صورت عادی بارگذاری می‌شود
+   - <img src="assets/icons/status-off.png" width="14" align="absmiddle"> **غیرفعال** — مسیردهی برای همه‌جا متوقف است
 
 ۴. **بگذارید افزونه کمکتان کند** — اگر سایتی به دامنه‌های CDN بیشتری نیاز دارد، یا صفحه‌ای
    تصویر/اسکریپت خراب دارد، ProxyHub یک راه‌حل یک‌کلیکی پیشنهاد می‌دهد.
@@ -99,7 +101,7 @@
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
-## ⚠️ نکات مهم
+## <img src="assets/icons/icon-warning.png" width="26" align="absmiddle"> نکات مهم
 
 - یک دامنه در هر لحظه فقط از یک مسیر عبور می‌کند — اگر دو سایت مختلف که اضافه کرده‌اید هر دو
   از یک دامنه CDN عمومی مشترک استفاده کنند، آن دامنه از قانونی پیروی می‌کند که زودتر ساخته
@@ -111,7 +113,7 @@
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
-## 💛 حمایت از پروژه
+## <img src="assets/icons/icon-heart.png" width="26" align="absmiddle"> حمایت از پروژه
 
 <div align="center">
 
@@ -134,7 +136,7 @@
 
 <div align="center">
 
-> از توجه و حمایت شما سپاسمندم ❤️
+> از توجه و حمایت شما سپاسمندم <img src="assets/icons/icon-heart.png" width="16" align="absmiddle">
 
 </div>
 

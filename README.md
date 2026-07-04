@@ -1,14 +1,16 @@
-,<div align="center">
+<div align="center">
   <img src="assets/banner.png" alt="ProxyHub Banner" width="100%">
 </div>
 
-# 🌐 ProxyHub — Per-Site Proxy Switcher
+# <img src="assets/icons/icon-globe.png" width="32" align="absmiddle"> ProxyHub — Per-Site Proxy Switcher
 
 <div align="center">
 
-[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#-support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers)
+[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#-support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/YOUR-USERNAME/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers)
 
 </div>
+
+<!-- NOTE: replace "YOUR-USERNAME" above with the actual GitHub owner/org of this repo -->
 
 > نسخه فارسی این راهنما موجود است: [README.fa.md](README.fa.md)
 
@@ -27,7 +29,7 @@ No technical background needed: install it, follow the built-in walkthrough, and
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
-## ✨ Features
+## <img src="assets/icons/icon-features.png" width="26" align="absmiddle"> Features
 
 - **One proxy per site** — YouTube through one proxy, another site through another, and
   everything else loading normally. No more switching a single global proxy on and off.
@@ -48,7 +50,7 @@ No technical background needed: install it, follow the built-in walkthrough, and
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
-## 🚀 Install
+## <img src="assets/icons/icon-install.png" width="26" align="absmiddle"> Install
 
 ### Option A — Chrome Web Store
 *(Coming soon — this section will be updated with the store link once it's published.)*
@@ -71,7 +73,7 @@ everything with pictures.
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
-## 📖 How to use it
+## <img src="assets/icons/icon-guide.png" width="26" align="absmiddle"> How to use it
 
 1. **Add a proxy** — open the extension's *Options* page → *Proxy profiles* → add your
    proxy's address, port, and login if it needs one. You only do this once per proxy.
@@ -80,9 +82,9 @@ everything with pictures.
    don't want to proxy.
 3. **Read the icon** — the toolbar icon always tells you the current tab's state at a
    glance:
-   - 🟢 **Proxied** — this tab is going through a proxy
-   - ⚪ **Direct** — no rule, loads normally
-   - 🔴 **Off** — routing is paused everywhere
+   - <img src="assets/icons/status-proxied.png" width="14" align="absmiddle"> **Proxied** — this tab is going through a proxy
+   - <img src="assets/icons/status-direct.png" width="14" align="absmiddle"> **Direct** — no rule, loads normally
+   - <img src="assets/icons/status-off.png" width="14" align="absmiddle"> **Off** — routing is paused everywhere
 4. **Let it help you** — if a site needs extra CDN domains, or a page has broken
    images/scripts, ProxyHub will offer a one-click fix.
 
@@ -90,7 +92,7 @@ everything with pictures.
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
-## ⚠️ Good to know
+## <img src="assets/icons/icon-warning.png" width="26" align="absmiddle"> Good to know
 
 - A single domain can only be routed one way at a time — if two different sites you've
   added both load assets from the very same generic CDN domain, that domain follows
@@ -102,12 +104,12 @@ everything with pictures.
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
-## 💛 Support the Project — Donate
+## <img src="assets/icons/icon-heart.png" width="26" align="absmiddle"> Support the Project — Donate
 
 <div align="center">
 
 If ProxyHub has been useful to you, consider supporting its continued development.
-Every contribution, big or small, is deeply appreciated. 🙏
+Every contribution, big or small, is deeply appreciated. <img src="assets/icons/icon-heart.png" width="16" align="absmiddle">
 
 </div>
 
@@ -127,6 +129,6 @@ Every contribution, big or small, is deeply appreciated. 🙏
 
 <div align="center">
 
-> Thank you for keeping this project alive. ❤️
+> Thank you for keeping this project alive. <img src="assets/icons/icon-heart.png" width="16" align="absmiddle">
 
 </div>
