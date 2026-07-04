@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#-support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers)
+[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#-support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers) &nbsp; [![License](https://img.shields.io/badge/License-Non--Commercial-c96b46?style=for-the-badge)](LICENSE)
 
 </div>
 
@@ -22,6 +22,25 @@ should go through, and everything else — related CDN domains, broken images, r
 management — is handled for you.
 
 No technical background needed: install it, follow the built-in walkthrough, and you're done.
+
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
+
+## Screenshots
+
+<table>
+<tr>
+<td width="35%" valign="top">
+<img src="assets/screenshots/popup.png" alt="ProxyHub popup — pick a proxy for the current site">
+<br><sub>Pick a proxy for the current tab, right from the toolbar popup.</sub>
+</td>
+<td width="65%" valign="top">
+<img src="assets/screenshots/options.jpg" alt="ProxyHub rules manager — full list of routing rules">
+<br><sub>Manage all your rules and proxy profiles from the full options page.</sub>
+</td>
+</tr>
+</table>
 
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">
@@ -97,6 +116,8 @@ everything with pictures.
   whichever rule was created first.
 - Safari isn't supported: Apple doesn't allow browser extensions to control proxy settings
   at all, so this isn't something that can be added later — it's a platform limitation.
+- **License**: free for personal use and modification. Commercial use is not permitted
+  without a separate written agreement with the author — see [LICENSE](LICENSE) for details.
 
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">

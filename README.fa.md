@@ -5,7 +5,7 @@
 # <img src="assets/icons/icon-globe.png" width="32" align="absmiddle"> ProxyHub — کنترل پروکسی در دستان تو
 <div align="center" dir="rtl">
 
-[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#-حمایت-از-پروژه--دونیت) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers)
+[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#-حمایت-از-پروژه--دونیت) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers) &nbsp; [![لایسنس](https://img.shields.io/badge/لایسنس-غیرتجاری-c96b46?style=for-the-badge)](LICENSE)
 
 </div>
 
@@ -23,6 +23,25 @@
 رفع تصاویر خراب، مدیریت قانون‌ها — را خود افزونه انجام می‌دهد.
 
 نیازی به دانش فنی نیست: افزونه را نصب کنید، راهنمای تصویری  را دنبال کنید و کافی است.
+
+<div align="center">
+  <img src="assets/divider.png" alt="" width="100%">
+</div>
+
+## اسکرین‌شات‌ها
+
+<table dir="rtl">
+<tr>
+<td width="35%" valign="top">
+<img src="assets/screenshots/popup.png" alt="پاپ‌آپ ProxyHub — انتخاب پروکسی برای سایت فعلی">
+<br><sub>انتخاب پروکسی برای تب فعلی، مستقیم از پاپ‌آپ نوار ابزار.</sub>
+</td>
+<td width="65%" valign="top">
+<img src="assets/screenshots/options.jpg" alt="صفحه مدیریت قانون‌های ProxyHub — لیست کامل قوانین مسیردهی">
+<br><sub>مدیریت همه‌ی قانون‌ها و پروفایل‌های پروکسی از صفحه‌ی کامل تنظیمات.</sub>
+</td>
+</tr>
+</table>
 
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">
@@ -106,6 +125,8 @@
   شده است.
 - سافاری پشتیبانی نمی‌شود: اپل اصلاً اجازه نمی‌دهد افزونه‌های مرورگر تنظیمات پروکسی را کنترل
   کنند، بنابراین این محدودیت خود پلتفرم است، نه چیزی که بعداً بتوان اضافه کرد.
+- **لایسنس**: استفاده و تغییر کد برای مصارف شخصی رایگان است. استفاده‌ی تجاری بدون توافق‌نامه‌ی
+  کتبی جداگانه با نویسنده مجاز نیست — جزئیات در فایل [LICENSE](LICENSE).
 
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">
