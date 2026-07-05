@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#-support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers) &nbsp; [![License](https://img.shields.io/badge/License-Non--Commercial-c96b46?style=for-the-badge)](LICENSE)
+[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers) &nbsp; [![License](https://img.shields.io/badge/License-Non--Commercial-c96b46?style=for-the-badge)](LICENSE) &nbsp; [![Version](https://img.shields.io/badge/version-1.0.0-e08a68?style=for-the-badge)](#)
 
 </div>
 
@@ -23,10 +23,20 @@ management — is handled for you.
 
 No technical background needed: install it, follow the built-in walkthrough, and you're done.
 
+### <img src="assets/icons/icon-toc.png" width="24" align="absmiddle"> Table of Contents
+
+- [Screenshots](#screenshots)
+- [Features](#features)
+- [Install](#install)
+- [How to use it](#how-to-use-it)
+- [Good to know](#good-to-know)
+- [Support the Project — Donate](#support-the-project--donate)
+
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="screenshots"></a>
 ## Screenshots
 
 <table>
@@ -46,6 +56,7 @@ No technical background needed: install it, follow the built-in walkthrough, and
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="features"></a>
 ## <img src="assets/icons/icon-features.png" width="26" align="absmiddle"> Features
 
 - **One proxy per site** — YouTube through one proxy, another site through another, and
@@ -67,6 +78,7 @@ No technical background needed: install it, follow the built-in walkthrough, and
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="install"></a>
 ## <img src="assets/icons/icon-install.png" width="26" align="absmiddle"> Install
 
 ### Option A — Chrome Web Store
@@ -90,6 +102,7 @@ everything with pictures.
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="how-to-use-it"></a>
 ## <img src="assets/icons/icon-guide.png" width="26" align="absmiddle"> How to use it
 
 1. **Add a proxy** — open the extension's *Options* page → *Proxy profiles* → add your
@@ -109,6 +122,7 @@ everything with pictures.
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="good-to-know"></a>
 ## <img src="assets/icons/icon-warning.png" width="26" align="absmiddle"> Good to know
 
 - A single domain can only be routed one way at a time — if two different sites you've
@@ -123,6 +137,7 @@ everything with pictures.
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="support-the-project--donate"></a>
 ## <img src="assets/icons/icon-heart.png" width="26" align="absmiddle"> Support the Project — Donate
 
 <div align="center">

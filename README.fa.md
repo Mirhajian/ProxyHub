@@ -5,7 +5,7 @@
 # <img src="assets/icons/icon-globe.png" width="32" align="absmiddle"> ProxyHub — کنترل پروکسی در دستان تو
 <div align="center" dir="rtl">
 
-[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#-حمایت-از-پروژه--دونیت) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers) &nbsp; [![لایسنس](https://img.shields.io/badge/لایسنس-غیرتجاری-c96b46?style=for-the-badge)](LICENSE)
+[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#support) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers) &nbsp; [![لایسنس](https://img.shields.io/badge/لایسنس-غیرتجاری-c96b46?style=for-the-badge)](LICENSE) &nbsp; [![نسخه](https://img.shields.io/badge/نسخه-1.0.0-e08a68?style=for-the-badge)](#)
 
 </div>
 
@@ -17,17 +17,27 @@
 
 <div dir="rtl">
 
-افزونه **ProxyHub**  یک افزونه کروم است که به شما اجازه می‌دهد برای **هر سایت جداگانه** یک پروکسی
+**ProxyHub**  افزونه کروم است که به شما اجازه می‌دهد برای **هر سایت جداگانه** یک پروکسی
 انتخاب کنید، به‌جای اینکه یک پروکسی در vpn ها را برای کل مرورگر روشن یا خاموش کنید. کافیست سایت را
 انتخاب کنید، بگویید از کدام پروکسی عبور کند، و بقیه کارها — پیدا کردن دامنه‌های CDN مرتبط،
 رفع تصاویر خراب، مدیریت قانون‌ها — را خود افزونه انجام می‌دهد.
 
 نیازی به دانش فنی نیست: افزونه را نصب کنید، راهنمای تصویری  را دنبال کنید و کافی است.
 
+### <img src="assets/icons/icon-toc.png" width="24" align="absmiddle"> فهرست مطالب
+
+- [اسکرین‌شات‌ها](#screenshots)
+- [قابلیت‌ها](#features)
+- [نصب](#install)
+- [نحوه استفاده](#howto)
+- [نکات مهم](#goodtoknow)
+- [حمایت از پروژه](#support)
+
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="screenshots"></a>
 ## اسکرین‌شات‌ها
 
 <table dir="rtl">
@@ -47,6 +57,7 @@
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="features"></a>
 ## <img src="assets/icons/icon-features.png" width="26" align="absmiddle"> قابلیت‌ها
 
 - **یک پروکسی برای هر سایت** — یوتیوب از یک پروکسی، سایتی دیگر از پروکسی دیگر، و بقیه
@@ -68,6 +79,7 @@
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="install"></a>
 ## <img src="assets/icons/icon-install.png" width="26" align="absmiddle"> نصب
 
 ### روش الف — فروشگاه وب کروم
@@ -96,6 +108,7 @@
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="howto"></a>
 ## <img src="assets/icons/icon-guide.png" width="26" align="absmiddle"> نحوه استفاده
 
 ۱. **یک پروکسی اضافه کنید** — صفحه *تنظیمات* افزونه را باز کنید → *پروفایل‌های پروکسی* →
@@ -118,6 +131,7 @@
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="goodtoknow"></a>
 ## <img src="assets/icons/icon-warning.png" width="26" align="absmiddle"> نکات مهم
 
 - یک دامنه در هر لحظه فقط از یک مسیر عبور می‌کند — اگر دو سایت مختلف که اضافه کرده‌اید هر دو
@@ -132,6 +146,7 @@
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
+<a id="support"></a>
 ## <img src="assets/icons/icon-heart.png" width="26" align="absmiddle"> حمایت از پروژه
 
 <div align="center">
