@@ -39,24 +39,20 @@ No technical background needed: install it, follow the built-in walkthrough, and
 <a id="screenshots"></a>
 ## Screenshots
 
+<p align="center">
+  <img src="assets/screenshots/options.jpg" alt="ProxyHub rules manager — full list of routing rules" width="90%">
+  <br><sub>Manage all your rules and proxy profiles from the full options page.</sub>
+</p>
+
 <table>
 <tr>
-<td width="28%" valign="top">
-
-<img src="assets/screenshots/toolbar.png" alt="ProxyHub toolbar icon — active vs inactive state" width="100%">
-<sub>The toolbar icon shows at a glance whether ProxyHub is routing the current site.</sub>
-
-<br><br>
-
-<img src="assets/screenshots/popup.png" alt="ProxyHub popup — pick a proxy for the current site" width="100%">
-<sub>Pick a proxy for the current tab, right from the toolbar popup.</sub>
-
+<td width="50%" align="center" valign="top">
+<img src="assets/screenshots/toolbar.png" alt="ProxyHub toolbar icon — active vs inactive state" width="85%">
+<br><sub>The toolbar icon shows at a glance whether ProxyHub is routing the current site.</sub>
 </td>
-<td width="72%" valign="top">
-
-<img src="assets/screenshots/options.jpg" alt="ProxyHub rules manager — full list of routing rules" width="100%">
-<sub>Manage all your rules and proxy profiles from the full options page.</sub>
-
+<td width="50%" align="center" valign="top">
+<img src="assets/screenshots/popup.png" alt="ProxyHub popup — pick a proxy for the current site" width="70%">
+<br><sub>Pick a proxy for the current tab, right from the toolbar popup.</sub>
 </td>
 </tr>
 </table>
