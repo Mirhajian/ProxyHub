@@ -2,7 +2,7 @@
   <img src="assets/banner.png" alt="ProxyHub Banner" width="100%">
 </div>
 
-# <img src="assets/icons/icon-globe.png" width="32" align="absmiddle"> ProxyHub — کنترل پروکسی در دستان تو
+# <img src="assets/icons/icon-globe.png" width="32" align="absmiddle"> کنترل پروکسی در دستان تو — ProxyHub
 <div align="center" dir="rtl">
 
 [![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#support) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers) &nbsp; [![لایسنس](https://img.shields.io/badge/لایسنس-غیرتجاری-c96b46?style=for-the-badge)](LICENSE) &nbsp; [![نسخه](https://img.shields.io/badge/نسخه-1.0.0-e08a68?style=for-the-badge)](#)
