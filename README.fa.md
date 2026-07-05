@@ -42,19 +42,22 @@
 
 <table dir="rtl">
 <tr>
-<td width="35%" valign="top">
-<img src="assets/screenshots/toolbar.png" alt="آیکون نوار ابزار ProxyHub — حالت فعال و غیرفعال">
-<br><sub>آیکون نوار ابزار با یک نگاه نشان می‌دهد که ProxyHub در حال مسیردهی سایت فعلی هست یا نه.</sub>
+<td width="28%" valign="top">
+
+<img src="assets/screenshots/toolbar.png" alt="آیکون نوار ابزار ProxyHub — حالت فعال و غیرفعال" width="100%">
+<sub>آیکون نوار ابزار با یک نگاه نشان می‌دهد که ProxyHub در حال مسیردهی سایت فعلی هست یا نه.</sub>
+
+<br><br>
+
+<img src="assets/screenshots/popup.png" alt="پاپ‌آپ ProxyHub — انتخاب پروکسی برای سایت فعلی" width="100%">
+<sub>انتخاب پروکسی برای تب فعلی، مستقیم از پاپ‌آپ نوار ابزار.</sub>
+
 </td>
-<td width="65%" valign="top">
-<img src="assets/screenshots/popup.png" alt="پاپ‌آپ ProxyHub — انتخاب پروکسی برای سایت فعلی">
-<br><sub>انتخاب پروکسی برای تب فعلی، مستقیم از پاپ‌آپ نوار ابزار.</sub>
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top">
-<img src="assets/screenshots/options.jpg" alt="صفحه مدیریت قانون‌های ProxyHub — لیست کامل قوانین مسیردهی">
-<br><sub>مدیریت همه‌ی قانون‌ها و پروفایل‌های پروکسی از صفحه‌ی کامل تنظیمات.</sub>
+<td width="72%" valign="top">
+
+<img src="assets/screenshots/options.jpg" alt="صفحه مدیریت قانون‌های ProxyHub — لیست کامل قوانین مسیردهی" width="100%">
+<sub>مدیریت همه‌ی قانون‌ها و پروفایل‌های پروکسی از صفحه‌ی کامل تنظیمات.</sub>
+
 </td>
 </tr>
 </table>
