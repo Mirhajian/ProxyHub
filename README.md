@@ -42,10 +42,16 @@ No technical background needed: install it, follow the built-in walkthrough, and
 <table>
 <tr>
 <td width="35%" valign="top">
+<img src="assets/screenshots/toolbar.png" alt="ProxyHub toolbar icon — active vs inactive state">
+<br><sub>The toolbar icon shows at a glance whether ProxyHub is routing the current site.</sub>
+</td>
+<td width="65%" valign="top">
 <img src="assets/screenshots/popup.png" alt="ProxyHub popup — pick a proxy for the current site">
 <br><sub>Pick a proxy for the current tab, right from the toolbar popup.</sub>
 </td>
-<td width="65%" valign="top">
+</tr>
+<tr>
+<td colspan="2" valign="top">
 <img src="assets/screenshots/options.jpg" alt="ProxyHub rules manager — full list of routing rules">
 <br><sub>Manage all your rules and proxy profiles from the full options page.</sub>
 </td>
