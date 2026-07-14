@@ -5,7 +5,7 @@
 # <img src="assets/icons/icon-globe.png" width="32" align="absmiddle"> کنترل پروکسی در دستان تو — ProxyHub
 <div align="center" dir="rtl">
 
-[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#support) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers) &nbsp; [![لایسنس](https://img.shields.io/badge/لایسنس-غیرتجاری-c96b46?style=for-the-badge)](LICENSE) &nbsp; [![نسخه](https://img.shields.io/badge/نسخه-1.0.0-e08a68?style=for-the-badge)](#)
+[![English](https://img.shields.io/badge/_English-README.md-blue?style=for-the-badge)](README.md) &nbsp; [![💰 حمایت از پروژه](https://img.shields.io/badge/💰_حمایت_از_پروژه-Donate-orange?style=for-the-badge)](#support) &nbsp; [![⭐ استار بده](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=%E2%AD%90%20%D8%A7%D8%B3%D8%AA%D8%A7%D8%B1%20%D8%A8%D8%AF%D9%87&color=e08a68)](../../stargazers) &nbsp; [![لایسنس](https://img.shields.io/badge/لایسنس-غیرتجاری-c96b46?style=for-the-badge)](LICENSE) &nbsp; [![نسخه](https://img.shields.io/badge/نسخه-1.1.0-e08a68?style=for-the-badge)](#)
 
 </div>
 
@@ -23,6 +23,9 @@
 رفع تصاویر خراب، مدیریت قانون‌ها — را خود افزونه انجام می‌دهد.
 
 نیازی به دانش فنی نیست: افزونه را نصب کنید، راهنمای تصویری  را دنبال کنید و کافی است.
+
+> **تازه در نسخه‌ی ۱.۱.۰:** ProxyHub حالا روی فایرفاکس (نسخه دسکتاپ ۱۲۸ به بعد) هم اجرا
+> می‌شود — به بخش [روش ج — فایرفاکس](#install) در ادامه نگاه کنید.
 
 ### <img src="assets/icons/icon-toc.png" width="24" align="absmiddle"> فهرست مطالب
 
@@ -108,6 +111,35 @@
 
 همین! همان بار اول، یک راهنمای خوش‌آمدگویی به‌صورت خودکار باز می‌شود و همراه با تصویر همه‌چیز
 را توضیح می‌دهد.
+
+### روش ج — فایرفاکس (نصب دستی، فایرفاکس دسکتاپ ۱۲۸ به بعد)
+
+فایرفاکس به فایل manifest جداگانه‌ای نیاز دارد، چون چند کلید از manifest که فقط مخصوص کروم
+هستند را پشتیبانی نمی‌کند. خود افزونه هیچ فرقی ندارد — فقط فایل manifest فرق می‌کند.
+
+۱. این ریپازیتوری را مثل روش ب دانلود و از حالت فشرده خارج کنید.
+
+۲. داخل پوشه‌ی خارج‌شده از حالت فشرده‌ی `ProxyHub`، فایل `manifest.json` را حذف (یا تغییرنام)
+   دهید، سپس فایل `manifest.firefox.json` را به `manifest.json` تغییرنام دهید.
+
+۳. آدرس `about:debugging#/runtime/this-firefox` را در فایرفاکس باز کنید.
+
+۴. روی **Load Temporary Add-on…** بزنید و هر فایلی داخل پوشه‌ی `ProxyHub` (مثلاً همان
+   `manifest.json`) را انتخاب کنید.
+
+۵. آیکن افزونه را به نوار ابزار پین کنید.
+
+دو نکته‌ی مخصوص فایرفاکس:
+
+- **افزونه‌ی موقت با ری‌استارت فایرفاکس حذف می‌شود.** برای نصب دائمی، فایل `.xpi` باید
+  توسط موزیلا (از طریق [addons.mozilla.org](https://addons.mozilla.org)) امضا شود — این
+  یک مرحله‌ی حساب‌کاربری/امضای موزیلاست که این ریپازیتوری نمی‌تواند برایتان انجام دهد.
+  پیش از ارسال، در فایل `manifest.firefox.json` مقدار `browser_specific_settings.gecko.id`
+  را به شناسه‌ای که مالک آن هستید تغییر دهید.
+- **نحوه‌ی کار پروکسی در پشت صحنه فرق دارد.** کروم اجازه می‌دهد ProxyHub یک اسکریپت PAC
+  به آن بدهد؛ فایرفاکس این کار را برای افزونه‌های عادی اجازه نمی‌دهد، پس روی فایرفاکس
+  ProxyHub به‌جای آن، برای هر درخواست به‌صورت لحظه‌ای و با همان قانون‌ها تصمیم می‌گیرد.
+  رفتار نهایی یکسان است — این فقط تفاوت فنی زیرساخت است.
 
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">

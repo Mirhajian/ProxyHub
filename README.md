@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers) &nbsp; [![License](https://img.shields.io/badge/License-Non--Commercial-c96b46?style=for-the-badge)](LICENSE) &nbsp; [![Version](https://img.shields.io/badge/version-1.0.0-e08a68?style=for-the-badge)](#)
+[![Persian](https://img.shields.io/badge/_Persian-README.fa.md-blue?style=for-the-badge)](README.fa.md) &nbsp; [![💰 Donate](https://img.shields.io/badge/💰_Support_the_Project-Donate-orange?style=for-the-badge)](#support-the-project--donate) &nbsp; [![Star this repo](https://img.shields.io/github/stars/Mirhajian/ProxyHub?style=for-the-badge&label=Star%20this%20repo&color=e08a68)](../../stargazers) &nbsp; [![License](https://img.shields.io/badge/License-Non--Commercial-c96b46?style=for-the-badge)](LICENSE) &nbsp; [![Version](https://img.shields.io/badge/version-1.1.0-e08a68?style=for-the-badge)](#)
 
 </div>
 
@@ -22,6 +22,9 @@ should go through, and everything else — related CDN domains, broken images, r
 management — is handled for you.
 
 No technical background needed: install it, follow the built-in walkthrough, and you're done.
+
+> **New in 1.1.0:** ProxyHub now also runs on Firefox Desktop 128 or later. See
+> [Option C — Firefox](#install) below.
 
 ### <img src="assets/icons/icon-toc.png" width="24" align="absmiddle"> Table of Contents
 
@@ -102,6 +105,32 @@ No technical background needed: install it, follow the built-in walkthrough, and
 
 That's it — a welcome guide opens automatically the first time, walking you through
 everything with pictures.
+
+### Option C — Firefox (manual install, Firefox Desktop 128+)
+
+Firefox needs its own manifest file, since it doesn't support a couple of the Chrome-only
+manifest keys this project otherwise uses. The extension itself is the same — only the
+manifest differs.
+
+1. Download this repository the same way as in Option B and unzip it.
+2. Inside the unzipped `ProxyHub` folder, delete (or rename) `manifest.json`, then rename
+   `manifest.firefox.json` to `manifest.json`.
+3. Open `about:debugging#/runtime/this-firefox` in Firefox.
+4. Click **Load Temporary Add-on…** and select any file inside the `ProxyHub` folder (e.g.
+   `manifest.json`).
+5. Pin the extension icon to your toolbar.
+
+Two Firefox-specific notes:
+
+- **Temporary add-ons are removed when Firefox restarts.** To install it permanently, the
+  `.xpi` needs to be signed by Mozilla (via [addons.mozilla.org](https://addons.mozilla.org),
+  either published or as a self-distributed signed build) — that's a Mozilla account/signing
+  step, not something this repo can do for you. Before submitting, open
+  `manifest.firefox.json` and change `browser_specific_settings.gecko.id` to an ID you own.
+- **How proxying works differs under the hood.** Chrome lets ProxyHub hand it one PAC
+  script; Firefox doesn't allow that for regular extensions, so on Firefox ProxyHub instead
+  decides the proxy for each request live, using the same rules. Behavior is the same either
+  way — this is just plumbing.
 
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">
