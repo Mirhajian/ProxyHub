@@ -46,7 +46,7 @@ const ONB_UI = { back: "Back", next: "Next", done: "Get started" };
 let onbIndex = 0;
 
 function onbMarkSeen() {
-  chrome.storage.local.set({ [ONB_SEEN_KEY]: true });
+  PH_API.storage.local.set({ [ONB_SEEN_KEY]: true });
 }
 
 function onbClose() {
@@ -175,7 +175,7 @@ function onbAttachSwipe() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  chrome.storage.local.get([ONB_SEEN_KEY], (res) => {
+  Promise.resolve(PH_API.storage.local.get([ONB_SEEN_KEY])).then((res) => {
     if (res && res[ONB_SEEN_KEY]) return;
 
     document.getElementById("onbOverlay").hidden = false;

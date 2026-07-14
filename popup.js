@@ -5,7 +5,7 @@ let currentTabId = null;
 let pendingGroup = null;
 
 function send(msg) {
-  return chrome.runtime.sendMessage(msg);
+  return PH_API.runtime.sendMessage(msg);
 }
 
 function shExpMatchLike(host, pattern) {
@@ -163,16 +163,16 @@ function pulseReloadBtn() {
 }
 
 document.getElementById("reloadPageBtn").addEventListener("click", () => {
-  if (currentTabId) chrome.tabs.reload(currentTabId);
+  if (currentTabId) PH_API.tabs.reload(currentTabId);
 });
 document.getElementById("profileSelect").addEventListener("change", onProfileChange);
 document.getElementById("includeSubdomains").addEventListener("change", () => {
   const sel = document.getElementById("profileSelect");
   if (sel.value !== PH_DIRECT_ID) onProfileChange();
 });
-document.getElementById("openOptions").addEventListener("click", () => chrome.runtime.openOptionsPage());
+document.getElementById("openOptions").addEventListener("click", () => PH_API.runtime.openOptionsPage());
 
-chrome.storage.onChanged.addListener((changes, area) => {
+PH_API.storage.onChanged.addListener((changes, area) => {
   if (area === "local" && changes[PH_STORAGE_KEY]) refresh();
 });
 

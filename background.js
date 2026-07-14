@@ -1,5 +1,16 @@
-// background.js — ProxyHub service worker
-importScripts("lib/constants.js", "lib/groups.js", "lib/crypto.js");
+// background.js — ProxyHub background script
+//
+// On Chrome this runs as an MV3 service worker, loaded via manifest.json's
+// "background.service_worker" — importScripts() (a Worker-only API) is how
+// it pulls in the lib/ files below.
+// On Firefox this runs as a plain MV3 background/event page, loaded via
+// manifest.firefox.json's "background.scripts" array, which already lists
+// lib/constants.js, lib/groups.js and lib/crypto.js ahead of this file —
+// they land in the same global scope automatically, so importScripts()
+// (undefined outside a Worker) is skipped.
+if (typeof importScripts === "function") {
+  importScripts("lib/constants.js", "lib/groups.js", "lib/crypto.js");
+}
 
 const STORAGE_KEY = PH_STORAGE_KEY;
 
@@ -30,7 +41,7 @@ const STORAGE_KEY = PH_STORAGE_KEY;
 let cachedKey = null; // in-memory AES-GCM CryptoKey while vault unlocked, this session only
 
 async function getState() {
-  const { [STORAGE_KEY]: state } = await chrome.storage.local.get(STORAGE_KEY);
+  const { [STORAGE_KEY]: state } = await PH_API.storage.local.get(STORAGE_KEY);
   const base = state || { enabled: true, vault: { locked: false, saltB64: null }, profiles: [], rules: [] };
   if (!base.defaultMode) base.defaultMode = PH_DIRECT_ID;
   if (typeof base.enabled !== "boolean") base.enabled = true;
@@ -39,7 +50,7 @@ async function getState() {
 }
 
 async function setState(state) {
-  await chrome.storage.local.set({ [STORAGE_KEY]: state });
+  await PH_API.storage.local.set({ [STORAGE_KEY]: state });
 }
 
 // ---------- Small shared helpers ----------
@@ -164,26 +175,79 @@ function stateNeedsPac(state) {
 
 async function applyProxySettings() {
   const state = await getState();
+
+  // Firefox: regular (unprivileged) extensions can't use proxy.settings —
+  // that's restricted to Mozilla-signed privileged add-ons. Instead the
+  // proxy.onRequest listener registered below (see "Firefox live proxy
+  // routing") reads getState() fresh on every single request, so there's
+  // no PAC blob to build or push here. Just keep the badge/tab icons in
+  // sync and stop.
+  if (PH_IS_FIREFOX) {
+    PH_API.action.setBadgeText({ text: "" });
+    await refreshAllTabIcons(state);
+    return;
+  }
+
   if (!state.enabled || !stateNeedsPac(state)) {
-    await chrome.proxy.settings.clear({ scope: "regular" });
-    chrome.action.setBadgeText({ text: "" });
+    await PH_API.proxy.settings.clear({ scope: "regular" });
+    PH_API.action.setBadgeText({ text: "" });
     await refreshAllTabIcons(state);
     return;
   }
   try {
     const pacScript = buildPacScript(state);
-    await chrome.proxy.settings.set({
+    await PH_API.proxy.settings.set({
       value: { mode: "pac_script", pacScript: { data: pacScript } },
       scope: "regular"
     });
-    chrome.action.setBadgeText({ text: "" });
+    PH_API.action.setBadgeText({ text: "" });
   } catch (e) {
     console.error("ProxyHub: failed to apply proxy settings, clearing to avoid blocking browsing.", e);
-    await chrome.proxy.settings.clear({ scope: "regular" });
-    chrome.action.setBadgeText({ text: "!" });
-    chrome.action.setBadgeBackgroundColor({ color: "#c9694a" });
+    await PH_API.proxy.settings.clear({ scope: "regular" });
+    PH_API.action.setBadgeText({ text: "!" });
+    PH_API.action.setBadgeBackgroundColor({ color: "#c9694a" });
   }
   await refreshAllTabIcons(state);
+}
+
+// ---------- Firefox live proxy routing (proxy.onRequest) ----------
+//
+// Firefox has no pac_script mode available to regular extensions, so
+// instead of building one PAC blob for the whole browser we answer the
+// question "how should THIS request be routed?" live, per request, using
+// the exact same resolveRouteMode() logic the toolbar icon and popup
+// already use. This listener is only registered on Firefox (guarded by
+// PH_IS_FIREFOX) — on Chrome, proxy.onRequest doesn't exist at all.
+function firefoxProxyInfoFor(profile) {
+  const schemeToType = { http: "http", https: "https", socks5: "socks", socks4: "socks4" };
+  return {
+    type: schemeToType[profile.scheme] || "http",
+    host: profile.host,
+    port: Number(profile.port)
+    // No username/password here — Firefox's ProxyInfo doesn't accept
+    // credentials directly. They're supplied the same way as on Chrome,
+    // via the webRequest.onAuthRequired listener below.
+  };
+}
+
+async function resolveFirefoxProxyInfo(requestInfo) {
+  try {
+    const state = await getState();
+    if (!state.enabled) return { type: "direct" };
+    const host = new URL(requestInfo.url).hostname;
+    const route = resolveRouteMode(state, host);
+    if (route.mode !== "proxy") return { type: "direct" };
+    const profile = state.profiles.find(p => p.id === route.profileId);
+    if (!isProfileUsable(profile)) return { type: "direct" };
+    return firefoxProxyInfoFor(profile);
+  } catch (e) {
+    // Never block a request over a routing bug — fail open to direct.
+    return { type: "direct" };
+  }
+}
+
+if (PH_IS_FIREFOX && PH_API.proxy && PH_API.proxy.onRequest) {
+  PH_API.proxy.onRequest.addListener(resolveFirefoxProxyInfo, { urls: ["<all_urls>"] });
 }
 
 // ---------- Per-tab toolbar icon: shows at a glance whether the active
@@ -208,28 +272,28 @@ async function updateIconForTab(tabId, urlOrPendingUrl, state) {
   if (!state.enabled) kind = "off";
   else if (host) kind = resolveRouteMode(state, host).mode === "proxy" ? "proxy" : "direct";
   try {
-    await chrome.action.setIcon({ tabId, path: ICON_SETS[kind] });
-    await chrome.action.setTitle({ tabId, title: ICON_TITLES[kind] });
+    await PH_API.action.setIcon({ tabId, path: ICON_SETS[kind] });
+    await PH_API.action.setTitle({ tabId, title: ICON_TITLES[kind] });
   } catch (e) { /* tab may have closed mid-update */ }
 }
 
 async function refreshAllTabIcons(state) {
   try {
-    const tabs = await chrome.tabs.query({});
+    const tabs = await PH_API.tabs.query({});
     for (const tab of tabs) {
       await updateIconForTab(tab.id, tab.pendingUrl || tab.url, state);
     }
   } catch (e) { /* ignore */ }
 }
 
-chrome.tabs.onActivated.addListener(async ({ tabId }) => {
+PH_API.tabs.onActivated.addListener(async ({ tabId }) => {
   try {
-    const tab = await chrome.tabs.get(tabId);
+    const tab = await PH_API.tabs.get(tabId);
     const state = await getState();
     await updateIconForTab(tabId, tab.pendingUrl || tab.url, state);
   } catch (e) { /* ignore */ }
 });
-chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+PH_API.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (!changeInfo.url && changeInfo.status !== "loading") return;
   const state = await getState();
   await updateIconForTab(tabId, tab.pendingUrl || tab.url, state);
@@ -237,31 +301,45 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 
 // ---------- Proxy authentication ----------
 
-chrome.webRequest.onAuthRequired.addListener(
-  async (details, callback) => {
-    const state = await getState();
-    const match = state.profiles.find(p => {
-      return details.isProxy && details.challenger &&
-        details.challenger.host === p.host && details.challenger.port === Number(p.port);
-    });
-    if (!match) { callback({}); return; }
+async function resolveAuthResponse(details) {
+  const state = await getState();
+  const match = state.profiles.find(p => {
+    return details.isProxy && details.challenger &&
+      details.challenger.host === p.host && details.challenger.port === Number(p.port);
+  });
+  if (!match) return {};
 
-    let password = match.password;
-    if (match.encPassword) {
-      if (!cachedKey) { callback({}); return; }
-      try {
-        password = await decryptString(match.encPassword, cachedKey);
-      } catch (e) {
-        callback({});
-        return;
-      }
+  let password = match.password;
+  if (match.encPassword) {
+    if (!cachedKey) return {};
+    try {
+      password = await decryptString(match.encPassword, cachedKey);
+    } catch (e) {
+      return {};
     }
-    if (!match.username) { callback({}); return; }
-    callback({ authCredentials: { username: match.username, password: password || "" } });
-  },
-  { urls: ["<all_urls>"] },
-  ["asyncBlocking"]
-);
+  }
+  if (!match.username) return {};
+  return { authCredentials: { username: match.username, password: password || "" } };
+}
+
+// Chrome (MV3) only supports async proxy-auth via "asyncBlocking" + a
+// callback parameter — it doesn't accept a Promise return value. Firefox
+// supports async proxy-auth via "blocking" + returning a Promise instead.
+// Same underlying logic (resolveAuthResponse), different registration
+// shape per browser.
+if (PH_IS_FIREFOX) {
+  PH_API.webRequest.onAuthRequired.addListener(
+    (details) => resolveAuthResponse(details),
+    { urls: ["<all_urls>"] },
+    ["blocking"]
+  );
+} else {
+  PH_API.webRequest.onAuthRequired.addListener(
+    (details, callback) => { resolveAuthResponse(details).then(callback); },
+    { urls: ["<all_urls>"] },
+    ["asyncBlocking"]
+  );
+}
 
 // ---------- Vault unlock/lock (session-scoped key cache) ----------
 
@@ -274,11 +352,11 @@ async function unlockVault(passphrase) {
     await setState(state);
   }
   const jwk = await exportKey(key);
-  await chrome.storage.session.set({ vaultKeyJwk: jwk });
+  await PH_API.storage.session.set({ vaultKeyJwk: jwk });
 }
 
 async function tryRestoreVaultKey() {
-  const { vaultKeyJwk } = await chrome.storage.session.get("vaultKeyJwk");
+  const { vaultKeyJwk } = await PH_API.storage.session.get("vaultKeyJwk");
   if (vaultKeyJwk) {
     cachedKey = await importKey(vaultKeyJwk);
   }
@@ -288,18 +366,18 @@ tryRestoreVaultKey();
 // ---------- Context menu: "Load in new tab with ProxyHub" ----------
 
 function setupContextMenu() {
-  chrome.contextMenus.removeAll(() => {
-    chrome.contextMenus.create({
+  PH_API.contextMenus.removeAll(() => {
+    PH_API.contextMenus.create({
       id: "proxyhub-open-link",
       title: "Load in new tab with ProxyHub",
       contexts: ["link"]
     });
   });
 }
-chrome.runtime.onInstalled.addListener(setupContextMenu);
-chrome.runtime.onStartup.addListener(setupContextMenu);
+PH_API.runtime.onInstalled.addListener(setupContextMenu);
+PH_API.runtime.onStartup.addListener(setupContextMenu);
 
-chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+PH_API.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId !== "proxyhub-open-link" || !info.linkUrl) return;
 
   let host;
@@ -312,11 +390,11 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
   if (!covered) {
     if (!state.profiles.length) {
-      chrome.tabs.create({ url: info.linkUrl, index: tab ? tab.index + 1 : undefined });
-      chrome.runtime.openOptionsPage();
+      PH_API.tabs.create({ url: info.linkUrl, index: tab ? tab.index + 1 : undefined });
+      PH_API.runtime.openOptionsPage();
       return;
     }
-    const { ph_last_profile } = await chrome.storage.local.get("ph_last_profile");
+    const { ph_last_profile } = await PH_API.storage.local.get("ph_last_profile");
     const profileId = state.profiles.some(p => p.id === ph_last_profile)
       ? ph_last_profile
       : state.profiles[0].id;
@@ -335,12 +413,12 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     await applyProxySettings();
   }
 
-  chrome.tabs.create({ url: info.linkUrl, index: tab ? tab.index + 1 : undefined });
+  PH_API.tabs.create({ url: info.linkUrl, index: tab ? tab.index + 1 : undefined });
 });
 
 // ---------- Message API (popup / options talk to background) ----------
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+PH_API.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   (async () => {
     switch (msg.type) {
       case "GET_STATE": {
@@ -359,7 +437,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         break;
       }
       case "GET_ACTIVE_TAB_HOST": {
-        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+        const [tab] = await PH_API.tabs.query({ active: true, currentWindow: true });
         const effectiveUrl = tab ? (tab.pendingUrl || tab.url) : null;
         let host = null;
         try { host = effectiveUrl ? new URL(effectiveUrl).hostname : null; } catch (e) {}
@@ -414,7 +492,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         }
         await setState(state);
         await applyProxySettings();
-        await chrome.storage.local.set({ ph_last_profile: msg.profileId });
+        await PH_API.storage.local.set({ ph_last_profile: msg.profileId });
         sendResponse({ ok: true });
         break;
       }
@@ -445,7 +523,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         owner.patterns = [...new Set([...owner.patterns, ...patterns])];
         await setState(state);
         await applyProxySettings();
-        await chrome.storage.local.set({ ph_last_profile: msg.profileId });
+        await PH_API.storage.local.set({ ph_last_profile: msg.profileId });
         sendResponse({ ok: true });
         break;
       }
@@ -460,7 +538,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       }
       case "LOCK_VAULT": {
         cachedKey = null;
-        await chrome.storage.session.remove("vaultKeyJwk");
+        await PH_API.storage.session.remove("vaultKeyJwk");
         sendResponse({ ok: true });
         break;
       }
@@ -475,7 +553,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         break;
       }
       case "OPEN_OPTIONS_PAGE": {
-        chrome.runtime.openOptionsPage();
+        PH_API.runtime.openOptionsPage();
         sendResponse({ ok: true });
         break;
       }
@@ -526,7 +604,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         }
         await setState(state);
         await applyProxySettings();
-        await chrome.storage.local.set({ ph_last_profile: msg.profileId });
+        await PH_API.storage.local.set({ ph_last_profile: msg.profileId });
         sendResponse({ ok: true, added });
         break;
       }
@@ -538,16 +616,16 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 
 // Re-apply on install/startup so PAC survives browser restarts.
-chrome.runtime.onInstalled.addListener(applyProxySettings);
-chrome.runtime.onStartup.addListener(applyProxySettings);
+PH_API.runtime.onInstalled.addListener(applyProxySettings);
+PH_API.runtime.onStartup.addListener(applyProxySettings);
 
 // First run: open the Options page. options.html/onboard.js takes care of
 // showing the in-page welcome wizard once it loads (it checks storage for
 // whether onboarding has already been seen), so this just needs to get the
 // page open — it works the same whether the extension came from the Chrome
 // Web Store or was loaded unpacked.
-chrome.runtime.onInstalled.addListener((details) => {
+PH_API.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") {
-    chrome.runtime.openOptionsPage();
+    PH_API.runtime.openOptionsPage();
   }
 });

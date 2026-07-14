@@ -39,13 +39,16 @@
 (() => {
   if (window.top !== window) return; // main frame only
 
-  const send = (msg) => new Promise((resolve) => {
+  const send = (msg) => {
     try {
-      chrome.runtime.sendMessage(msg, (res) => resolve(res));
+      // Promise-based on both Chrome (MV3) and Firefox. A callback param
+      // here would silently do nothing on Firefox, since its `browser.*`
+      // namespace (aliased as PH_API) only ever resolves via Promise.
+      return Promise.resolve(PH_API.runtime.sendMessage(msg)).catch(() => null);
     } catch (e) {
-      resolve(null);
+      return Promise.resolve(null);
     }
-  });
+  };
 
   // Lightweight mirror of PAC's shExpMatch (only "*" wildcard).
   function shExpMatchLike(host, pattern) {
@@ -188,14 +191,12 @@
 
   function getTheme() {
     if (cachedTheme) return Promise.resolve(cachedTheme);
-    return new Promise((res) => {
-      try {
-        chrome.storage.local.get("ph_theme", (r) => {
-          cachedTheme = (r && r.ph_theme) || "dark";
-          res(cachedTheme);
-        });
-      } catch (e) { res("dark"); }
-    });
+    return Promise.resolve(PH_API.storage.local.get("ph_theme"))
+      .then((r) => {
+        cachedTheme = (r && r.ph_theme) || "dark";
+        return cachedTheme;
+      })
+      .catch(() => "dark");
   }
 
   function mountBannerHost() {

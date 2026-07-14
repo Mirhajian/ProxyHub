@@ -6,7 +6,7 @@ let currentPage = 1;
 let letterFilter = null;
 let expandedRuleIds = new Set();
 
-function send(msg) { return chrome.runtime.sendMessage(msg); }
+function send(msg) { return PH_API.runtime.sendMessage(msg); }
 function uid() { return crypto.randomUUID(); }
 function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 function ruleEnabled(r) { return r.enabled !== false; }
@@ -26,7 +26,7 @@ function setThemeIcon(theme) {
   document.getElementById("themeIcon").innerHTML = theme === "dark" ? PH_ICONS.moon : PH_ICONS.sun;
 }
 async function loadTheme() {
-  const { ph_theme } = await chrome.storage.local.get("ph_theme");
+  const { ph_theme } = await PH_API.storage.local.get("ph_theme");
   const theme = ph_theme || "dark";
   document.documentElement.setAttribute("data-theme", theme);
   setThemeIcon(theme);
@@ -36,7 +36,7 @@ document.getElementById("themeToggle").addEventListener("click", async () => {
   const next = current === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", next);
   setThemeIcon(next);
-  await chrome.storage.local.set({ ph_theme: next });
+  await PH_API.storage.local.set({ ph_theme: next });
 });
 
 // ---------------- Master routing switch ----------------
@@ -690,7 +690,7 @@ async function refreshDiagnostics() {
 document.getElementById("refreshDiagBtn").addEventListener("click", refreshDiagnostics);
 
 // ---------------- Live updates ----------------
-chrome.storage.onChanged.addListener((changes, area) => {
+PH_API.storage.onChanged.addListener((changes, area) => {
   if (area !== "local" || !changes[PH_STORAGE_KEY]) return;
   refreshLive();
 });
