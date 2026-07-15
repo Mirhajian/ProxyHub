@@ -3,30 +3,19 @@
   "name": "ProxyHub — Per-Site Proxy Switcher Pro",
   "version": "1.1.0",
   "description": "Minimal per-site / per-domain proxy switcher with real wildcard support, nested CDN companion groups, a searchable rule manager, and an optional encrypted credential vault.",
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "proxyhub@mirhajian.dev",
-      "strict_min_version": "128.0"
-    }
-  },
   "permissions": [
     "proxy",
     "storage",
     "tabs",
     "webRequest",
-    "webRequestBlocking",
+    "webRequestAuthProvider",
     "contextMenus"
   ],
   "host_permissions": [
     "<all_urls>"
   ],
   "background": {
-    "scripts": [
-      "lib/constants.js",
-      "lib/groups.js",
-      "lib/crypto.js",
-      "background.js"
-    ]
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {

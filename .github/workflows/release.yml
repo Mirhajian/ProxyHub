@@ -1,0 +1,65 @@
+name: Build & Release
+
+# Runs automatically whenever a tag like "v1.1.0" is pushed.
+# Builds two zips from the exact same source (one per browser, since the
+# only real difference is manifest.json vs manifest.firefox.json) and
+# attaches both to the GitHub Release for that tag — no manual file
+# renaming needed on your end anymore.
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read version from tag
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Build Chrome package
+        run: |
+          rm -rf build/chrome
+          mkdir -p build/chrome
+          git archive HEAD | tar -x -C build/chrome
+          rm -f build/chrome/manifest.firefox.json
+          rm -rf build/chrome/.github
+          cd build/chrome
+          zip -r "../../proxyhub-chrome-${{ steps.version.outputs.version }}.zip" . -x "*.DS_Store"
+
+      - name: Build Firefox package
+        run: |
+          rm -rf build/firefox
+          mkdir -p build/firefox
+          git archive HEAD | tar -x -C build/firefox
+          rm -rf build/firefox/.github
+          rm -f build/firefox/manifest.json
+          mv build/firefox/manifest.firefox.json build/firefox/manifest.json
+          cd build/firefox
+          zip -r "../../proxyhub-firefox-${{ steps.version.outputs.version }}.zip" . -x "*.DS_Store"
+
+      - name: Verify manifest versions match the tag
+        run: |
+          CHROME_VER=$(node -pe "require('./build/chrome/manifest.json').version")
+          FIREFOX_VER=$(node -pe "require('./build/firefox/manifest.json').version")
+          echo "Tag: ${{ steps.version.outputs.version }} | manifest.json: $CHROME_VER | manifest.firefox.json: $FIREFOX_VER"
+          if [ "$CHROME_VER" != "${{ steps.version.outputs.version }}" ] || [ "$FIREFOX_VER" != "${{ steps.version.outputs.version }}" ]; then
+            echo "::warning::Tag version (${{ steps.version.outputs.version }}) doesn't match one of the manifest 'version' fields. Releasing anyway, but double-check the manifests next time."
+          fi
+
+      - name: Create GitHub Release with both zips attached
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "ProxyHub v${{ steps.version.outputs.version }}"
+          generate_release_notes: true
+          files: |
+            proxyhub-chrome-${{ steps.version.outputs.version }}.zip
+            proxyhub-firefox-${{ steps.version.outputs.version }}.zip

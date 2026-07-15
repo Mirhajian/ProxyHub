@@ -89,54 +89,72 @@ No technical background needed: install it, follow the built-in walkthrough, and
 <a id="install"></a>
 ## <img src="assets/icons/icon-install.png" width="26" align="absmiddle"> Install
 
-### Option A — Chrome Web Store
-*(Coming soon — this section will be updated with the store link once it's published.)*
+### Option A — Chrome Web Store / Firefox Add-ons
+*(Coming soon — this section will be updated with store links once they're published.)*
 
-### Option B — Manual install (works today, in any Chromium browser: Chrome, Edge, Brave, Arc, Opera)
+### Option B — Chrome, Edge, Brave, Arc, Opera (any Chromium browser)
 
-1. Download this repository — click the green **Code** button above → **Download ZIP**,
-   then unzip it (or `git clone` it if you're comfortable with Git).
+1. Go to the [**Releases** page](../../releases) and download `proxyhub-chrome-X.Y.Z.zip`
+   from the latest release, then unzip it.
 2. Open `chrome://extensions` in your browser.
    For Brave, use `brave://extensions`, and similarly for Arc and Edge:
    `arc://extensions` and `edge://extensions`.
 3. Turn on **Developer mode** (top-right toggle).
-4. Click **Load unpacked** and select the unzipped `ProxyHub` folder.
+4. Click **Load unpacked** and select the unzipped folder.
 5. Pin the extension icon to your toolbar so it's always one click away.
 
 That's it — a welcome guide opens automatically the first time, walking you through
 everything with pictures.
 
-### Option C — Firefox (manual install, Firefox Desktop 128+)
+### Option C — Firefox (Desktop 128+)
 
-Firefox needs its own manifest file, since it doesn't support a couple of the Chrome-only
-manifest keys this project otherwise uses. The extension itself is the same — only the
-manifest differs.
-
-1. Download this repository the same way as in Option B and unzip it.
-2. Inside the unzipped `ProxyHub` folder, delete (or rename) `manifest.json`, then rename
-   `manifest.firefox.json` to `manifest.json`.
-3. Open `about:debugging#/runtime/this-firefox` in Firefox.
-4. Click **Load Temporary Add-on…** and select any file inside the `ProxyHub` folder (e.g.
-   `manifest.json`).
-5. Pin the extension icon to your toolbar.
+1. Go to the [**Releases** page](../../releases) and download `proxyhub-firefox-X.Y.Z.zip`
+   from the latest release, then unzip it. (This package already has the right manifest for
+   Firefox — nothing to rename or edit.)
+2. Open `about:debugging#/runtime/this-firefox` in Firefox.
+3. Click **Load Temporary Add-on…** and select the `manifest.json` inside the unzipped
+   folder.
+4. Pin the extension icon to your toolbar.
 
 Two Firefox-specific notes:
 
-- **Temporary add-ons are removed when Firefox restarts.** To install it permanently, the
-  `.xpi` needs to be signed by Mozilla (via [addons.mozilla.org](https://addons.mozilla.org),
-  either published or as a self-distributed signed build) — that's a Mozilla account/signing
-  step, not something this repo can do for you. Before submitting, open
-  `manifest.firefox.json` and change `browser_specific_settings.gecko.id` to an ID you own.
+- **Temporary add-ons are removed every time Firefox fully restarts** — you'll need to
+  repeat step 3 after each restart (your profiles/rules aren't lost, they're saved in the
+  browser's extension storage; only the "is this add-on loaded" state resets). This is a
+  Firefox restriction on unsigned extensions, not something ProxyHub can change. To install
+  it permanently instead:
+  - Get it signed by Mozilla via [addons.mozilla.org](https://addons.mozilla.org) — either
+    published publicly or as a free "self-distribution" signed `.xpi` you install once and
+    keep. (If you do this, open `manifest.firefox.json` first and change
+    `browser_specific_settings.gecko.id` to an ID you own.)
+  - Or, on Firefox Developer Edition/Nightly/ESR only, set
+    `xpinstall.signatures.required` to `false` in `about:config` and install the `.xpi`
+    directly — not available on regular release Firefox.
+  - For active development, Mozilla's [`web-ext run`](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/)
+    CLI auto-reloads a temporary add-on for you each time, which removes most of the
+    tedium of Firefox's reload behavior while you're iterating on the code.
 - **How proxying works differs under the hood.** Chrome lets ProxyHub hand it one PAC
   script; Firefox doesn't allow that for regular extensions, so on Firefox ProxyHub instead
   decides the proxy for each request live, using the same rules. Behavior is the same either
   way — this is just plumbing.
+
+### Building from source / for developers
+
+The repository always contains both `manifest.json` (Chrome) and `manifest.firefox.json`
+(Firefox) side by side — you only need to touch one of them if you're testing an unreleased
+change: for Firefox testing, temporarily rename `manifest.firefox.json` to `manifest.json`
+(or delete/rename the existing one first) before loading it unpacked. Every push of a
+`vX.Y.Z` tag automatically builds and attaches both ready-to-use zips
+(`proxyhub-chrome-X.Y.Z.zip` and `proxyhub-firefox-X.Y.Z.zip`) to that tag's GitHub Release
+via [`.github/workflows/release.yml`](.github/workflows/release.yml) — that's what Option B
+and Option C above download, so most people never need to do this manually.
 
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">
 </div>
 
 <a id="how-to-use-it"></a>
+
 ## <img src="assets/icons/icon-guide.png" width="26" align="absmiddle"> How to use it
 
 1. **Add a proxy** — open the extension's *Options* page → *Proxy profiles* → add your
