@@ -11,7 +11,6 @@
 
 > The English version of this guide is available at: [README.md](README.md)
 
-
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">
 </div>
@@ -135,7 +134,11 @@
     به‌صورت عمومی منتشرش کنید یا به‌عنوان یک `.xpi` امضاشده‌ی «self-distribution» رایگان که
     فقط خودتون نصبش می‌کنید و می‌مونه. (اگه این کار رو کردید، اول فایل
     `manifest.firefox.json` رو باز کنید و `browser_specific_settings.gecko.id` رو به یه
-    شناسه‌ی متعلق به خودتون تغییر بدید.)
+    شناسه‌ی متعلق به خودتون تغییر بدید. همچنین AMO الان برای هر submission جدید می‌خواد
+    نوع داده‌ای که جمع‌آوری می‌کنید رو هم از طریق
+    `browser_specific_settings.gecko.data_collection_permissions` مشخص کنید — این مقدار از
+    قبل روی `{"required": ["none"]}` تنظیم شده، چون ProxyHub هیچ داده‌ای جمع‌آوری یا ارسال
+    نمی‌کنه؛ فقط اگه این موضوع تغییر کرد، این مقدار رو هم عوض کنید.)
   - یا فقط روی نسخه‌های Developer Edition / Nightly / ESR فایرفاکس، مقدار
     `xpinstall.signatures.required` رو توی `about:config` روی `false` بذارید و `.xpi` رو
     مستقیم نصب کنید — این روش روی نسخه‌ی عادی/release فایرفاکس در دسترس نیست.

@@ -12,7 +12,6 @@
 
 > نسخه فارسی این راهنما موجود است: [README.fa.md](README.fa.md)
 
-
 <div align="center">
   <img src="assets/divider.png" alt="" width="100%">
 </div>
@@ -127,7 +126,11 @@ Two Firefox-specific notes:
   - Get it signed by Mozilla via [addons.mozilla.org](https://addons.mozilla.org) — either
     published publicly or as a free "self-distribution" signed `.xpi` you install once and
     keep. (If you do this, open `manifest.firefox.json` first and change
-    `browser_specific_settings.gecko.id` to an ID you own.)
+    `browser_specific_settings.gecko.id` to an ID you own. AMO also now requires every new
+    submission to declare its data collection practices via
+    `browser_specific_settings.gecko.data_collection_permissions` — this is already set to
+    `{"required": ["none"]}` in `manifest.firefox.json`, since ProxyHub doesn't collect or
+    transmit any data; only change this if that ever stops being true.)
   - Or, on Firefox Developer Edition/Nightly/ESR only, set
     `xpinstall.signatures.required` to `false` in `about:config` and install the `.xpi`
     directly — not available on regular release Firefox.
