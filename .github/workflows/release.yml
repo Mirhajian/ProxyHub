@@ -4,7 +4,7 @@ name: Build & Release
 # Builds two zips from the exact same source (one per browser, since the
 # only real difference is manifest.json vs manifest.firefox.json) and
 # attaches both to the GitHub Release for that tag — no manual file
-# renaming needed on your end anymore.
+# renaming needed on your end anymore
 
 on:
   push:
