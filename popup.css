@@ -143,4 +143,13 @@ select:focus, input[type=text]:focus {
 .ph-manage-btn:hover { color: var(--text); border-color: var(--border-strong); }
 .ph-manage-btn .ph-svg { width: 14px; height: 14px; }
 
+.ph-quick-toggle {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 7px;
+  background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 9px;
+  color: var(--text); padding: 9px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.ph-quick-toggle:hover { border-color: var(--accent); background: var(--accent); color: var(--bg); }
+.ph-quick-toggle:active { transform: scale(.99); }
+.ph-quick-toggle .ph-svg { width: 14px; height: 14px; }
+
 button { font-family: inherit; }

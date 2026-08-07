@@ -69,6 +69,7 @@ async function refresh() {
   renderStatusPill();
   renderProfileSelect();
   renderGroupHint();
+  renderQuickToggle();
 }
 
 function renderStatusPill() {
@@ -81,6 +82,32 @@ function renderStatusPill() {
   else { cls = "st-direct"; icon = "direct"; label = "—"; }
   pill.className = `ph-status-pill ${cls}`;
   pill.innerHTML = `<span class="ph-svg">${PH_ICONS[icon]}</span><span>${label}</span>`;
+}
+
+// One-click "route this site / stop routing this site" toggle: no dropdown
+// needed — proxy it through the first usable profile, or drop the rule back
+// to Direct. Reuses SET_SITE_PROFILE so the rule lands in the same store.
+function renderQuickToggle() {
+  const btn = document.getElementById("quickToggleBtn");
+  if (!currentHost || !state.enabled) { btn.hidden = true; return; }
+  btn.hidden = false;
+  const proxied = resolveEffective(currentHost).mode === "proxy";
+  document.getElementById("quickToggleText").textContent = proxied ? "Stop routing this site" : "Route this site";
+}
+
+async function onQuickToggle() {
+  if (!currentHost) return;
+  const effective = resolveEffective(currentHost);
+  const includeSubdomains = document.getElementById("includeSubdomains").checked;
+  if (effective.mode === "proxy") {
+    await send({ type: "SET_SITE_PROFILE", host: currentHost, profileId: PH_DIRECT_ID, includeSubdomains });
+  } else {
+    const usable = (state.profiles || []).find(isProfileUsableLite);
+    if (!usable) { flashInlineMsg("Add a proxy profile in Options first.", "info"); return; }
+    await send({ type: "SET_SITE_PROFILE", host: currentHost, profileId: usable.id, includeSubdomains });
+  }
+  await refresh();
+  pulseReloadBtn();
 }
 
 function renderProfileSelect() {
@@ -165,6 +192,7 @@ function pulseReloadBtn() {
 document.getElementById("reloadPageBtn").addEventListener("click", () => {
   if (currentTabId) PH_API.tabs.reload(currentTabId);
 });
+document.getElementById("quickToggleBtn").addEventListener("click", onQuickToggle);
 document.getElementById("profileSelect").addEventListener("change", onProfileChange);
 document.getElementById("includeSubdomains").addEventListener("change", () => {
   const sel = document.getElementById("profileSelect");
